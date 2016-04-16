@@ -113,7 +113,8 @@ class OLGeoView(GeoViewBase):
                 'default_title': p.toolkit._('Map viewer'),
                 'schema': {
                     'feature_hoveron': [ignore_empty, boolean_validator],
-                    'feature_style': [ignore_empty]
+                    'feature_style': [ignore_empty],
+                    'resource_extent': [ignore_empty]
                 },
                }
 

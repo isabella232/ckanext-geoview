@@ -373,6 +373,15 @@
                 var fragMap = OL_HELPERS.parseKVP((window.parent || window).location.hash && (window.parent || window).location.hash.substring(1));
 
                 var bbox = (fragMap.bbox && new OpenLayers.Bounds(fragMap.bbox.split(',')).transform(OL_HELPERS.EPSG4326, this.map.getProjectionObject()));
+
+                if (!bbox) {
+                    var resourceExtent;
+                    if (ckan.geoview && ckan.geoview.resource_extent) {
+                        resourceExtent = ckan.geoview.resource_extent;
+                        bbox = new OpenLayers.Bounds(resourceExtent.split(',')).transform(OL_HELPERS.EPSG4326, this.map.getProjectionObject());
+                    }
+                }
+
                 if (bbox) this.map.zoomToExtent(bbox);
 
                 var proxyUrl = this.options.proxy_url;

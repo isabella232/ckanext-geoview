@@ -3,3 +3,5 @@
 {{ form.checkbox('feature_hoveron', label=_('Display Feature Info on Hover'), value=True, checked=data.feature_hoveron, error=errors.feature_hoveron) }}
 
 {{ form.textarea('feature_style', label=_('Feature style descriptor'), value=data.feature_style, error=errors.feature_style) }}
+
+{{ form.textarea('resource_extent', label=_('Start extent'), value=data.resource_extent, error=errors.resource_extent) }}
