@@ -229,6 +229,7 @@
 
                 var baseMapLayer;
                 var urls;
+                var name;
                 var attribution;
 
                 var isHttps = window.location.href.substring(0, 5).toLowerCase() === 'https';
@@ -245,7 +246,8 @@
                                 '//d.tiles.mapbox.com/v4/' + mapConfig['mapbox.map_id'] + '/${z}/${x}/${y}.png?access_token=' + mapConfig['mapbox.access_token'],
                     ];
                     attribution = '<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox &copy; OpenStreetMap </a> <a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>';
-                    baseMapLayer = new OpenLayers.Layer.XYZ('MapBox', urls, {
+                    name = 'MapBox';
+                    baseMapLayer = new OpenLayers.Layer.XYZ(name, urls, {
                         sphericalMercator: true,
                         wrapDateLine: true,
                         attribution: attribution
@@ -256,7 +258,8 @@
                     if (urls.indexOf('${x}') === -1) {
                       urls = urls.replace('{x}', '${x}').replace('{y}', '${y}').replace('{z}', '${z}');
                     }
-                    baseMapLayer = new OpenLayers.Layer.XYZ('Base Layer', urls, {
+                    name = mapConfig['custom.name'] || 'Base Layer';
+                    baseMapLayer = new OpenLayers.Layer.XYZ(name, urls, {
                         sphericalMercator: true,
                         wrapDateLine: true,
                         attribution: mapConfig.attribution
@@ -277,7 +280,8 @@
                     }
                     var attribution = mapConfig.attribution || 'Map data &copy; OpenStreetMap contributors, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="//developer.mapquest.com/content/osm/mq_logo.png">';
 
-                    baseMapLayer = new OpenLayers.Layer.OSM('MapQuest OSM', urls, {
+                    name = 'MapQuest OSM';
+                    baseMapLayer = new OpenLayers.Layer.OSM(name, urls, {
                       attribution: attribution});
                 }
 
