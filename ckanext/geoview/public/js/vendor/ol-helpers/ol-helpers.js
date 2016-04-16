@@ -317,7 +317,7 @@
                                             //style: default_style,
                                             ftDescr: candidate,
                                             title: candidate.title,
-                                            strategies: [new OpenLayers.Strategy.BBOXWithMax({maxFeatures: MAX_FEATURES, ratio: 1})],
+                                            strategies: [new OpenLayers.Strategy.Fixed()],
                                             projection: Mercator,
                                             visibility: idx == 0,
                                             protocol: new OpenLayers.Protocol.WFS({
