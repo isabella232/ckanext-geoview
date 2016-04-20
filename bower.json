@@ -4,7 +4,8 @@
   "dependencies": {
     "ol-helpers": "pduchesne/ol-helpers",
     "leaflet": "~0.7.7",
-    "proj4leaflet": "~0.7.2"
+    "proj4leaflet": "~0.7.2",
+    "Leaflet.MapboxVectorTile": "~0.1.7"
   },
   "appPath": "ckanext/geoview/public"
 }
