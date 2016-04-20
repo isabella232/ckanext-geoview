@@ -215,6 +215,7 @@ class GeoJSONView(GeoViewBase):
                 'icon': 'map-marker',
                 'iframed': True,
                 'default_title': p.toolkit._('GeoJSON'),
+                'schema': {'mvt': [ignore_empty, boolean_validator]}
                 }
 
     def can_view(self, data_dict):
@@ -228,6 +229,9 @@ class GeoJSONView(GeoViewBase):
 
     def view_template(self, context, data_dict):
         return 'dataviewer/geojson.html'
+
+    def form_template(self, context, data_dict):
+        return 'dataviewer/geojson_form.html'
 
     # IResourcePreview (CKAN < 2.3)
 
@@ -263,6 +267,8 @@ class GeoJSONView(GeoViewBase):
                 data_dict['resource'].get('url')
             data_dict['resource']['url'] = \
                 proxy.get_proxified_resource_url(data_dict)
+ 
+        return {'mvt': data_dict['resource_view'].get('mvt')}
 
     # ITemplateHelpers
 
