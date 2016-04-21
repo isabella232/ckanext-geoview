@@ -1,6 +1,10 @@
 // mvt preview module
 ckan.module('mvtpreview', function (jQuery, _) {
   return {
+    options: {
+      table: '<div class="table-container"><table class="table table-striped table-bordered table-condensed"><tbody>{body}</tbody></table></div>',
+      row:'<tr><th>{key}</th><td>{value}</td></tr>'
+    },
     initialize: function () {
       var self = this;
 
@@ -33,6 +37,23 @@ ckan.module('mvtpreview', function (jQuery, _) {
         // In NextGIS Web we are using resource ID as MVT layer name.
         clickableLayers: [res_id],
 
+        // This callback is fired every time a layer in clickableLayers
+        // is clicked on.
+        onClick: function(e) {
+          var feature = e.feature;
+          var body = '';
+          if (feature) {
+            jQuery.each(feature.properties, function(key, value) {
+              body += L.Util.template(self.options.row, {key: key, value: value});
+            });
+            var popupContent = L.Util.template(self.options.table, {body: body});
+            var popup = L.popup()
+              .setLatLng(e.latlng)
+              .setContent(popupContent)
+              .openOn(feature.map);
+          }
+        },
+
         // Each MVT Feature needs a unique ID. You can specify a
         // specific function to create a unique ID that will be
         // associated with a given feature. Required.
@@ -52,6 +73,8 @@ ckan.module('mvtpreview', function (jQuery, _) {
           return false;
         },
 
+        // This function sets properties that the HTML5 Canvas' context
+        // uses to draw on the map.
         style: function (feature) {
           var style = {};
 
