@@ -116,8 +116,17 @@ ckan.module('mvtpreview', function (jQuery, _) {
 
       }).addTo(self.map);
 
-      // TODO: Move start extent to settings.
-      map.setView(new L.LatLng(45, 135), 7);
+      var resource_extent = self.options.resourceView.resource_extent;
+      if (resource_extent) {
+        var bounds = resource_extent.split(',');
+        self.map.fitBounds([
+          [bounds[1], bounds[0]],
+          [bounds[3], bounds[2]]
+        ]);
+      } else {
+        // Geographic center of Russia
+        map.setView(new L.LatLng(66, 94), 2);
+      }
     }
   };
 });
